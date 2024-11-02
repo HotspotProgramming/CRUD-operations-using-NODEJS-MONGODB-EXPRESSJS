@@ -85,6 +85,31 @@ app.put("/update/:id", async (req, res) => {
   }
 });
 
+//delete Employee
+app.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteEmployee = await Employees.findByIdAndDelete({ _id: id });
+    if (!deleteEmployee) {
+      return res.status(404).send({
+        status: false,
+        message: "Employee not found",
+      });
+    }
+    res.send({
+      status: true,
+      message: "Employee deleted successfully",
+      data: deleteEmployee,
+    });
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Request Failed",
+      error: err.message,
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log("running port no:", port);
 });
