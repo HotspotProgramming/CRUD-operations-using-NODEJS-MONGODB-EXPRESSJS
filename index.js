@@ -7,12 +7,15 @@ const port = 4000;
 app.use(bodyParser.json());
 //mongoDB connection
 mongoose
-  .connect("mongodb://localhost:27017/youtube")
+  .connect(
+    "mongodb+srv://hotspotprogramming:hp123456@cluster0.efim0.mongodb.net/youtube"
+  )
+
   .then(() => {
-    console.log("Connected to Mongodb");
+    console.log("Connected to MongoDB");
   })
-  .catch(err => {
-    console.log("Error connecting to Mongodb:", err);
+  .catch(error => {
+    console.log("Error connecting to MongoDB:", error);
   });
 
 //sample get api
